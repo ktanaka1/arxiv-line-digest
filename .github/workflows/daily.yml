@@ -1,0 +1,30 @@
+name: Daily arXiv Digest
+
+on:
+  schedule:
+    - cron: '0 22 * * *'  # JST 朝7時（UTC 22時）
+  workflow_dispatch:       # 手動実行も可能にする
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write      # notified.json の push に必要
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: astral-sh/setup-uv@v4
+
+      - run: uv sync
+
+      - name: Configure git for bot commit
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+      - run: uv run python -m arxiv_digest.main
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          LINE_CHANNEL_ACCESS_TOKEN: ${{ secrets.LINE_CHANNEL_ACCESS_TOKEN }}
+          LINE_TO: ${{ secrets.LINE_TO }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

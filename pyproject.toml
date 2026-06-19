@@ -1,0 +1,35 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "arxiv-digest"
+version = "0.1.0"
+description = "Personal arXiv paper digest bot via LINE"
+requires-python = ">=3.11"
+dependencies = [
+    "arxiv>=2.1.0",
+    "google-generativeai>=0.8.0",
+    "line-bot-sdk>=3.11.0",
+    "requests>=2.32.0",
+    "python-dotenv>=1.0.0",
+]
+
+[project.scripts]
+arxiv-digest = "arxiv_digest.main:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/arxiv_digest"]
+
+[dependency-groups]
+dev = [
+    "pytest>=8.3.0",
+    "ruff>=0.6.0",
+]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I"]
