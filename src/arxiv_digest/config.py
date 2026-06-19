@@ -6,7 +6,13 @@ ARXIV_CATEGORIES: list[str] = ["cs.AI", "cs.LG", "cs.CL"]
 # 1カテゴリあたりの最大取得件数（3カテゴリ × 100 = 300件上限）
 ARXIV_MAX_RESULTS: int = 100
 
+# 取得対象とする投稿日のルックバック日数（UTC基準）。
+# arXivは投稿→公開に1日ほどラグがあり、時差・週末も挟むため「当日ちょうど」では
+# ほぼ0件になる。直近数日を候補にし、実際の重複排除は notified.json で行う。
+ARXIV_LOOKBACK_DAYS: int = 2
+
 # 系統A: Gemini採点
+GEMINI_MODEL: str = "gemini-2.5-flash"  # 採点に使うモデル（無料枠あり・安定版）
 SCORE_THRESHOLD: int = 7       # 7点以上を通知
 SYSTEM_A_MAX: int = 5          # 最大5本
 

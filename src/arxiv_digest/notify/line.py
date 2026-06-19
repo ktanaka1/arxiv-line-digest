@@ -32,8 +32,9 @@ def format_system_a(paper: Paper) -> str:
         🐙 https://github.com/xxx/yyy
     """
     score_str = f"[{paper.score}/10]" if paper.score is not None else "[?/10]"
+    title = paper.title_ja or paper.title
     lines = [
-        f"🔵🆕 {score_str} {paper.title}",
+        f"🔵🆕 {score_str} {title}",
         paper.summary or "",
         f"📄 {paper.arxiv_url}",
     ]
@@ -65,8 +66,9 @@ def format_system_b(paper: Paper) -> str:
         tags.append("[HFトレンド]")
 
     tag_str = "".join(tags)
+    title = paper.title_ja or paper.title
     lines = [
-        f"🟡🌟 {tag_str} {paper.title}",
+        f"🟡🌟 {tag_str} {title}",
         paper.summary or "",
         f"📄 {paper.arxiv_url}",
     ]

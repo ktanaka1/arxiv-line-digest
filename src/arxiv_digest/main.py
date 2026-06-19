@@ -60,6 +60,7 @@ def run_system_a(notified_ids: set[str]) -> list[Paper]:
     for paper in candidates:
         result = score_paper(paper)
         paper.score = result.score
+        paper.title_ja = result.title_ja
         paper.summary = result.summary
         logger.info(
             "採点: %s | %d点 | %s", paper.arxiv_id, paper.score, paper.summary[:40]

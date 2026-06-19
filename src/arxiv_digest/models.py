@@ -10,12 +10,13 @@ class Paper:
     """1本の論文を表す。系統A・系統B 共通。"""
 
     arxiv_id: str          # "2406.12345"
-    title: str
+    title: str             # 原題（英語）
     abstract: str
     authors: list[str]
     arxiv_url: str         # "https://arxiv.org/abs/2406.12345"
     github_url: str | None = None  # Papers With Code 経由（系統Bで設定）
     score: int | None = None       # Gemini採点結果（系統Aで採点後に設定）
+    title_ja: str | None = None    # Gemini日本語タイトル（採点後に設定）
     summary: str | None = None     # Gemini日本語要約（採点後に設定）
     source: str = "system_a"       # "system_a" or "system_b"
     star_delta: int | None = None  # 系統Bのみ（7日間スター増加数）

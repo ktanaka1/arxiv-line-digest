@@ -14,6 +14,7 @@ from dataclasses import dataclass
 from google import genai
 from google.genai import types
 
+from arxiv_digest import config
 from arxiv_digest.models import Paper
 
 logger = logging.getLogger(__name__)
@@ -21,7 +22,15 @@ logger = logging.getLogger(__name__)
 # docs/specs/system-a.md の「プロンプト」セクションそのまま
 _PROMPT_TEMPLATE = """\
 あなたは以下の興味プロファイルを持つエンジニアです。
-論文を10点満点で採点し、スコア・1行日本語要約・採点根拠を返してください。
+論文を10点満点で採点し、日本語タイトル・スコア・日本語概要・採点根拠を返してください。
+日本語タイトルは原題を自然な日本語に訳したものにしてください。
+
+日本語概要は、リンク先を開かなくても内容が分かるように、以下を必ず含めて
+3〜4文の日本語でまとめてください：
+  - 何の課題に取り組んだか
+  - どんな手法・アプローチか
+  - 結果・結論（何がどれだけ良くなったか、何が分かったか）
+箇条書きにせず、自然な文章にしてください。
 
 【興味プロファイル】
 実装・ハッカー気質（Pragmatic）。
@@ -39,13 +48,14 @@ _PROMPT_TEMPLATE = """\
 アブストラクト: {abstract}
 
 【出力形式（JSON）】
-{{"score": 8, "summary": "〇〇を△△で実現する手法。コード公開あり。", "reason": "コード公開あり、個人再現可"}}
+{{"title_ja": "〇〇を△△で実現する手法", "score": 8, "summary": "従来手法では〜という課題があった。本研究では〜というアプローチでこれに取り組む。実験の結果〜が示され、〜だと結論づけている。", "reason": "コード公開あり、個人再現可"}}
 """
 
 
 @dataclass
 class ScoringResult:
     score: int
+    title_ja: str
     summary: str
     reason: str
 
@@ -70,7 +80,7 @@ def score_paper(paper: Paper) -> ScoringResult:
     try:
         client = _get_client()
         response = client.models.generate_content(
-            model="gemini-2.0-flash",
+            model=config.GEMINI_MODEL,
             contents=prompt,
             config=types.GenerateContentConfig(
                 response_mime_type="application/json",
@@ -79,11 +89,12 @@ def score_paper(paper: Paper) -> ScoringResult:
         raw = response.text
     except Exception as e:
         logger.error("Gemini API エラー (arxiv_id=%s): %s", paper.arxiv_id, e)
-        return ScoringResult(score=0, summary="", reason="")
+        return ScoringResult(score=0, title_ja="", summary="", reason="")
 
     try:
         data = json.loads(raw)
         score = int(data.get("score", 0))
+        title_ja = str(data.get("title_ja", ""))
         summary = str(data.get("summary", ""))
         reason = str(data.get("reason", ""))
     except (json.JSONDecodeError, ValueError, TypeError) as e:
@@ -93,6 +104,6 @@ def score_paper(paper: Paper) -> ScoringResult:
             e,
             raw[:200],
         )
-        return ScoringResult(score=0, summary="", reason="")
+        return ScoringResult(score=0, title_ja="", summary="", reason="")
 
-    return ScoringResult(score=score, summary=summary, reason=reason)
+    return ScoringResult(score=score, title_ja=title_ja, summary=summary, reason=reason)

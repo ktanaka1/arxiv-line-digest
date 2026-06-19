@@ -77,7 +77,7 @@ class TestRunSystemA:
 
         from arxiv_digest.scoring.llm_scorer import ScoringResult
         mock_score.side_effect = [
-            ScoringResult(score=s, summary=f"要約{s}", reason="")
+            ScoringResult(score=s, title_ja=f"タイトル{s}", summary=f"要約{s}", reason="")
             for s in scores
         ]
 
@@ -106,9 +106,9 @@ class TestRunSystemA:
         from arxiv_digest.scoring.llm_scorer import ScoringResult
         # スコア: 6（閾値未満）、7（閾値ちょうど通過）、8（通過）
         mock_score.side_effect = [
-            ScoringResult(score=6, summary="低スコア", reason=""),
-            ScoringResult(score=7, summary="ちょうど閾値", reason=""),
-            ScoringResult(score=8, summary="高スコア", reason=""),
+            ScoringResult(score=6, title_ja="低", summary="低スコア", reason=""),
+            ScoringResult(score=7, title_ja="閾値", summary="ちょうど閾値", reason=""),
+            ScoringResult(score=8, title_ja="高", summary="高スコア", reason=""),
         ]
 
         result = run_system_a(notified_ids=set())
@@ -133,7 +133,7 @@ class TestRunSystemA:
 
         from arxiv_digest.scoring.llm_scorer import ScoringResult
         # 採点が呼ばれるのは未通知の1本のみ
-        mock_score.return_value = ScoringResult(score=8, summary="新着", reason="")
+        mock_score.return_value = ScoringResult(score=8, title_ja="新着T", summary="新着", reason="")
 
         result = run_system_a(notified_ids={"2406.00001"})
 
