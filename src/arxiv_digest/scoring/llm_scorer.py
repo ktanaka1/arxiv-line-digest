@@ -11,7 +11,8 @@ import logging
 import os
 from dataclasses import dataclass
 
-import google.generativeai as genai
+from google import genai
+from google.genai import types
 
 from arxiv_digest.models import Paper
 
@@ -49,17 +50,11 @@ class ScoringResult:
     reason: str
 
 
-def _get_model() -> genai.GenerativeModel:
+def _get_client() -> genai.Client:
     api_key = os.environ.get("GEMINI_API_KEY")
     if not api_key:
         raise EnvironmentError("GEMINI_API_KEY 環境変数が設定されていません")
-    genai.configure(api_key=api_key)
-    return genai.GenerativeModel(
-        model_name="gemini-2.0-flash",
-        generation_config=genai.GenerationConfig(
-            response_mime_type="application/json",
-        ),
-    )
+    return genai.Client(api_key=api_key)
 
 
 def score_paper(paper: Paper) -> ScoringResult:
@@ -73,8 +68,14 @@ def score_paper(paper: Paper) -> ScoringResult:
     )
 
     try:
-        model = _get_model()
-        response = model.generate_content(prompt)
+        client = _get_client()
+        response = client.models.generate_content(
+            model="gemini-2.0-flash",
+            contents=prompt,
+            config=types.GenerateContentConfig(
+                response_mime_type="application/json",
+            ),
+        )
         raw = response.text
     except Exception as e:
         logger.error("Gemini API エラー (arxiv_id=%s): %s", paper.arxiv_id, e)
