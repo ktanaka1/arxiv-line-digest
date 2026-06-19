@@ -263,8 +263,9 @@ def _git_commit_and_push() -> None:
             check=True,
             capture_output=True,
         )
+        # GitHub Actions の checkout は detached HEAD のため、明示的に main へ push する
         subprocess.run(
-            ["git", "push"],
+            ["git", "push", "origin", "HEAD:main"],
             check=True,
             capture_output=True,
         )
