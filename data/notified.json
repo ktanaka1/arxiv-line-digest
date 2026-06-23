@@ -198,5 +198,105 @@
     "github_url": null,
     "stars_last_checked": null,
     "stars_checked_at": null
+  },
+  {
+    "arxiv_id": "2606.23181",
+    "notified_at": "2026-06-23",
+    "source": "system_a",
+    "score": 10,
+    "star_delta": null,
+    "github_url": null,
+    "stars_last_checked": null,
+    "stars_checked_at": null
+  },
+  {
+    "arxiv_id": "2606.23672",
+    "notified_at": "2026-06-23",
+    "source": "system_a",
+    "score": 9,
+    "star_delta": null,
+    "github_url": null,
+    "stars_last_checked": null,
+    "stars_checked_at": null
+  },
+  {
+    "arxiv_id": "2606.23608",
+    "notified_at": "2026-06-23",
+    "source": "system_a",
+    "score": 9,
+    "star_delta": null,
+    "github_url": null,
+    "stars_last_checked": null,
+    "stars_checked_at": null
+  },
+  {
+    "arxiv_id": "2606.23581",
+    "notified_at": "2026-06-23",
+    "source": "system_a",
+    "score": 9,
+    "star_delta": null,
+    "github_url": null,
+    "stars_last_checked": null,
+    "stars_checked_at": null
+  },
+  {
+    "arxiv_id": "2606.23543",
+    "notified_at": "2026-06-23",
+    "source": "system_a",
+    "score": 9,
+    "star_delta": null,
+    "github_url": null,
+    "stars_last_checked": null,
+    "stars_checked_at": null
+  },
+  {
+    "arxiv_id": "2606.23496",
+    "notified_at": "2026-06-23",
+    "source": "system_b",
+    "score": null,
+    "star_delta": null,
+    "github_url": null,
+    "stars_last_checked": null,
+    "stars_checked_at": null
+  },
+  {
+    "arxiv_id": "2606.23688",
+    "notified_at": "2026-06-23",
+    "source": "system_b",
+    "score": null,
+    "star_delta": null,
+    "github_url": null,
+    "stars_last_checked": null,
+    "stars_checked_at": null
+  },
+  {
+    "arxiv_id": "2606.19603",
+    "notified_at": "2026-06-23",
+    "source": "system_b",
+    "score": null,
+    "star_delta": null,
+    "github_url": null,
+    "stars_last_checked": null,
+    "stars_checked_at": null
+  },
+  {
+    "arxiv_id": "2606.23152",
+    "notified_at": "2026-06-23",
+    "source": "system_b",
+    "score": null,
+    "star_delta": null,
+    "github_url": null,
+    "stars_last_checked": null,
+    "stars_checked_at": null
+  },
+  {
+    "arxiv_id": "2606.22936",
+    "notified_at": "2026-06-23",
+    "source": "system_b",
+    "score": null,
+    "star_delta": null,
+    "github_url": null,
+    "stars_last_checked": null,
+    "stars_checked_at": null
   }
 ]
