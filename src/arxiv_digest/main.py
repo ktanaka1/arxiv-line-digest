@@ -13,6 +13,7 @@ from __future__ import annotations
 import logging
 import subprocess
 import sys
+from concurrent.futures import ThreadPoolExecutor
 from datetime import date
 
 from dotenv import load_dotenv
@@ -55,18 +56,23 @@ def run_system_a(notified_ids: set[str]) -> list[Paper]:
     candidates = [p for p in all_papers if p.arxiv_id not in notified_ids]
     logger.info("通知済み除外後: %d 件", len(candidates))
 
-    # 3. Gemini 採点
-    scored: list[Paper] = []
-    for paper in candidates:
+    # 3. Gemini 採点（並列）。逐次だと数百本で約1時間かかるため ThreadPool で並列化。
+    #    採点後にスコア降順ソートするので結果の到着順は問わない。
+    def _score_one(paper: Paper) -> Paper:
         result = score_paper(paper)
         paper.score = result.score
         paper.title_ja = result.title_ja
         paper.summary = result.summary
-        logger.info(
-            "採点: %s | %d点 | %s", paper.arxiv_id, paper.score, paper.summary[:40]
-        )
-        if paper.score >= config.SCORE_THRESHOLD:
-            scored.append(paper)
+        return paper
+
+    scored: list[Paper] = []
+    with ThreadPoolExecutor(max_workers=config.GEMINI_CONCURRENCY) as executor:
+        for paper in executor.map(_score_one, candidates):
+            logger.info(
+                "採点: %s | %d点 | %s", paper.arxiv_id, paper.score or 0, paper.summary[:40]
+            )
+            if (paper.score or 0) >= config.SCORE_THRESHOLD:
+                scored.append(paper)
 
     logger.info("閾値 (%d点) 以上: %d 件", config.SCORE_THRESHOLD, len(scored))
 

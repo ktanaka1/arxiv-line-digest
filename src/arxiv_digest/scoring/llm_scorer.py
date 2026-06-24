@@ -60,11 +60,20 @@ class ScoringResult:
     reason: str
 
 
+# 採点は最大数百回呼ばれるため、Client は使い回す（毎回生成しない）。
+# genai.Client は複数スレッドからの generate_content 呼び出しに対応するため、
+# 並列採点（main.py の ThreadPoolExecutor）でも単一インスタンスを共有してよい。
+_client: genai.Client | None = None
+
+
 def _get_client() -> genai.Client:
-    api_key = os.environ.get("GEMINI_API_KEY")
-    if not api_key:
-        raise EnvironmentError("GEMINI_API_KEY 環境変数が設定されていません")
-    return genai.Client(api_key=api_key)
+    global _client
+    if _client is None:
+        api_key = os.environ.get("GEMINI_API_KEY")
+        if not api_key:
+            raise EnvironmentError("GEMINI_API_KEY 環境変数が設定されていません")
+        _client = genai.Client(api_key=api_key)
+    return _client
 
 
 def score_paper(paper: Paper) -> ScoringResult:
@@ -84,6 +93,9 @@ def score_paper(paper: Paper) -> ScoringResult:
             contents=prompt,
             config=types.GenerateContentConfig(
                 response_mime_type="application/json",
+                # 1〜10点の関連度採点に拡張思考は不要。gemini-2.5-flash は思考が
+                # デフォルトONで1コール十数秒かかるため、明示的に無効化して高速化する。
+                thinking_config=types.ThinkingConfig(thinking_budget=0),
             ),
         )
         raw = response.text

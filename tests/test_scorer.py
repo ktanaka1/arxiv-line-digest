@@ -70,6 +70,21 @@ class TestScorePaper:
         assert result.reason == "根拠テキスト"
 
     @patch("arxiv_digest.scoring.llm_scorer._get_client")
+    def test_thinking_を無効化して呼び出す(self, mock_get_client):
+        """採点高速化のため thinking_budget=0 で呼ばれることを保証する（回帰防止）。"""
+        mock_client = MagicMock()
+        mock_client.models.generate_content.return_value = _make_response(
+            {"score": 5, "summary": "x", "reason": "y"}
+        )
+        mock_get_client.return_value = mock_client
+
+        score_paper(make_paper())
+
+        passed_config = mock_client.models.generate_content.call_args.kwargs["config"]
+        assert passed_config.thinking_config is not None
+        assert passed_config.thinking_config.thinking_budget == 0
+
+    @patch("arxiv_digest.scoring.llm_scorer._get_client")
     def test_score_below_threshold_is_returned_as_is(self, mock_get_client):
         """score=6（閾値未満）の場合でも scorer 自体は値をそのまま返す。
 

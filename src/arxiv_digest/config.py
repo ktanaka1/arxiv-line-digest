@@ -15,6 +15,9 @@ ARXIV_LOOKBACK_DAYS: int = 2
 GEMINI_MODEL: str = "gemini-2.5-flash"  # 採点に使うモデル（無料枠あり・安定版）
 SCORE_THRESHOLD: int = 7       # 7点以上を通知
 SYSTEM_A_MAX: int = 5          # 最大5本
+# 採点の並列数。数百本を逐次採点すると約1時間かかるため並列化する。
+# Gemini のレート制限(RPM)に当たる場合はこの値を下げる。
+GEMINI_CONCURRENCY: int = 6
 
 # 系統B: 生き残り系
 SYSTEM_B_MAX: int = 5          # 最大5本
