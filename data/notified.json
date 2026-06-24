@@ -298,5 +298,105 @@
     "github_url": null,
     "stars_last_checked": null,
     "stars_checked_at": null
+  },
+  {
+    "arxiv_id": "2606.24033",
+    "notified_at": "2026-06-24",
+    "source": "system_a",
+    "score": 10,
+    "star_delta": null,
+    "github_url": null,
+    "stars_last_checked": null,
+    "stars_checked_at": null
+  },
+  {
+    "arxiv_id": "2606.24884",
+    "notified_at": "2026-06-24",
+    "source": "system_a",
+    "score": 9,
+    "star_delta": null,
+    "github_url": null,
+    "stars_last_checked": null,
+    "stars_checked_at": null
+  },
+  {
+    "arxiv_id": "2606.24855",
+    "notified_at": "2026-06-24",
+    "source": "system_a",
+    "score": 9,
+    "star_delta": null,
+    "github_url": null,
+    "stars_last_checked": null,
+    "stars_checked_at": null
+  },
+  {
+    "arxiv_id": "2606.24841",
+    "notified_at": "2026-06-24",
+    "source": "system_a",
+    "score": 9,
+    "star_delta": null,
+    "github_url": null,
+    "stars_last_checked": null,
+    "stars_checked_at": null
+  },
+  {
+    "arxiv_id": "2606.24759",
+    "notified_at": "2026-06-24",
+    "source": "system_a",
+    "score": 9,
+    "star_delta": null,
+    "github_url": null,
+    "stars_last_checked": null,
+    "stars_checked_at": null
+  },
+  {
+    "arxiv_id": "2602.09379",
+    "notified_at": "2026-06-24",
+    "source": "system_b",
+    "score": null,
+    "star_delta": null,
+    "github_url": "https://github.com/Lingxi-mental-health/LingxiDiagBench",
+    "stars_last_checked": null,
+    "stars_checked_at": null
+  },
+  {
+    "arxiv_id": "2606.24876",
+    "notified_at": "2026-06-24",
+    "source": "system_b",
+    "score": null,
+    "star_delta": null,
+    "github_url": null,
+    "stars_last_checked": null,
+    "stars_checked_at": null
+  },
+  {
+    "arxiv_id": "2606.23449",
+    "notified_at": "2026-06-24",
+    "source": "system_b",
+    "score": null,
+    "star_delta": null,
+    "github_url": "https://github.com/aohp-os/aohp",
+    "stars_last_checked": null,
+    "stars_checked_at": null
+  },
+  {
+    "arxiv_id": "2606.24428",
+    "notified_at": "2026-06-24",
+    "source": "system_b",
+    "score": null,
+    "star_delta": null,
+    "github_url": null,
+    "stars_last_checked": null,
+    "stars_checked_at": null
+  },
+  {
+    "arxiv_id": "2606.24231",
+    "notified_at": "2026-06-24",
+    "source": "system_b",
+    "score": null,
+    "star_delta": null,
+    "github_url": "https://github.com/lixirui142/FlowR2A",
+    "stars_last_checked": null,
+    "stars_checked_at": null
   }
 ]
