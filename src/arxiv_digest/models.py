@@ -14,7 +14,7 @@ class Paper:
     abstract: str
     authors: list[str]
     arxiv_url: str         # "https://arxiv.org/abs/2406.12345"
-    github_url: str | None = None  # Papers With Code 経由（系統Bで設定）
+    github_url: str | None = None  # HF Papers API 経由で補完（系統Bで設定）
     score: int | None = None       # Gemini採点結果（系統Aで採点後に設定）
     title_ja: str | None = None    # Gemini日本語タイトル（採点後に設定）
     summary: str | None = None     # Gemini日本語要約（採点後に設定）

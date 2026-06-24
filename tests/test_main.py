@@ -60,7 +60,7 @@ def make_record(**kwargs) -> NotifiedRecord:
 
 
 class TestRunSystemA:
-    @patch("arxiv_digest.main.papers_with_code.get_github_url", return_value=None)
+    @patch("arxiv_digest.main.hugging_face.get_github_url", return_value=None)
     @patch("arxiv_digest.main.score_paper")
     @patch("arxiv_digest.main.arxiv_source.fetch_todays_papers")
     def test_returns_at_most_system_a_max_papers(
@@ -89,7 +89,7 @@ class TestRunSystemA:
         result_scores = [p.score for p in result]
         assert result_scores == sorted(result_scores, reverse=True)
 
-    @patch("arxiv_digest.main.papers_with_code.get_github_url", return_value=None)
+    @patch("arxiv_digest.main.hugging_face.get_github_url", return_value=None)
     @patch("arxiv_digest.main.score_paper")
     @patch("arxiv_digest.main.arxiv_source.fetch_todays_papers")
     def test_papers_below_threshold_are_filtered(
@@ -118,7 +118,7 @@ class TestRunSystemA:
         for p in result:
             assert p.score >= config.SCORE_THRESHOLD
 
-    @patch("arxiv_digest.main.papers_with_code.get_github_url", return_value=None)
+    @patch("arxiv_digest.main.hugging_face.get_github_url", return_value=None)
     @patch("arxiv_digest.main.score_paper")
     @patch("arxiv_digest.main.arxiv_source.fetch_todays_papers")
     def test_already_notified_papers_are_excluded(
@@ -149,7 +149,7 @@ class TestRunSystemA:
 
 
 class TestRunSystemB:
-    @patch("arxiv_digest.main.papers_with_code.get_github_url", return_value=None)
+    @patch("arxiv_digest.main.hugging_face.get_github_url", return_value=None)
     @patch("arxiv_digest.main._collect_star_candidates", return_value=[])
     @patch("arxiv_digest.main.hugging_face.fetch_hf_trending")
     def test_notified_papers_get_renotify_flag(
@@ -166,7 +166,7 @@ class TestRunSystemB:
         assert result_by_id["2406.already"].renotify is True
         assert result_by_id["2406.new"].renotify is False
 
-    @patch("arxiv_digest.main.papers_with_code.get_github_url", return_value=None)
+    @patch("arxiv_digest.main.hugging_face.get_github_url", return_value=None)
     @patch("arxiv_digest.main._collect_star_candidates", return_value=[])
     @patch("arxiv_digest.main.hugging_face.fetch_hf_trending")
     def test_returns_at_most_system_b_max(

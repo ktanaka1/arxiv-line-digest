@@ -26,7 +26,9 @@ DAILY_MAX: int = SYSTEM_A_MAX + SYSTEM_B_MAX  # 10
 
 # 外部 API エンドポイント
 HF_API_URL: str = "https://huggingface.co/api/daily_papers"
-PWC_API_URL: str = "https://paperswithcode.com/api/v1/papers/"
+# 単一論文メタデータ（githubRepo 等）。Papers With Code は 2025 年に終了し
+# paperswithcode.com は HF へ 302 リダイレクトされるため、後継として HF Papers API を使う。
+HF_PAPER_API_URL: str = "https://huggingface.co/api/papers/"
 
 # データストアパス（repo 相対パス。main.py からの実行を想定）
 NOTIFIED_JSON_PATH: str = "data/notified.json"

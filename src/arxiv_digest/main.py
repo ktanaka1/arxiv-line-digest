@@ -22,7 +22,7 @@ from arxiv_digest.models import NotifiedRecord, Paper
 from arxiv_digest.notify import line as line_notify
 from arxiv_digest.scoring.llm_scorer import score_paper
 from arxiv_digest.sources import arxiv as arxiv_source
-from arxiv_digest.sources import github_stars, hugging_face, papers_with_code
+from arxiv_digest.sources import github_stars, hugging_face
 from arxiv_digest.store import dedup
 
 logging.basicConfig(
@@ -74,9 +74,9 @@ def run_system_a(notified_ids: set[str]) -> list[Paper]:
     scored.sort(key=lambda p: p.score or 0, reverse=True)
     selected = scored[: config.SYSTEM_A_MAX]
 
-    # 5. GitHub URL 補完（Papers With Code）
+    # 5. GitHub URL 補完（HF Papers API）
     for paper in selected:
-        github_url = papers_with_code.get_github_url(paper.arxiv_id)
+        github_url = hugging_face.get_github_url(paper.arxiv_id)
         if github_url:
             paper.github_url = github_url
             logger.info("GitHub URL 補完: %s -> %s", paper.arxiv_id, github_url)
@@ -128,7 +128,7 @@ def run_system_b(notified_ids: set[str]) -> list[Paper]:
     # --- GitHub URL 補完（HF 由来で未取得のもの）---
     for paper in all_b:
         if paper.github_url is None:
-            github_url = papers_with_code.get_github_url(paper.arxiv_id)
+            github_url = hugging_face.get_github_url(paper.arxiv_id)
             if github_url:
                 paper.github_url = github_url
 
