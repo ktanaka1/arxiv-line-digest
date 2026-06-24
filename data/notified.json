@@ -356,8 +356,8 @@
     "score": null,
     "star_delta": null,
     "github_url": "https://github.com/Lingxi-mental-health/LingxiDiagBench",
-    "stars_last_checked": null,
-    "stars_checked_at": null
+    "stars_last_checked": 9,
+    "stars_checked_at": "2026-06-24"
   },
   {
     "arxiv_id": "2606.24876",
@@ -376,8 +376,8 @@
     "score": null,
     "star_delta": null,
     "github_url": "https://github.com/aohp-os/aohp",
-    "stars_last_checked": null,
-    "stars_checked_at": null
+    "stars_last_checked": 68,
+    "stars_checked_at": "2026-06-24"
   },
   {
     "arxiv_id": "2606.24428",
@@ -396,6 +396,96 @@
     "score": null,
     "star_delta": null,
     "github_url": "https://github.com/lixirui142/FlowR2A",
+    "stars_last_checked": 2,
+    "stars_checked_at": "2026-06-24"
+  },
+  {
+    "arxiv_id": "2606.24626",
+    "notified_at": "2026-06-24",
+    "source": "system_a",
+    "score": 9,
+    "star_delta": null,
+    "github_url": null,
+    "stars_last_checked": null,
+    "stars_checked_at": null
+  },
+  {
+    "arxiv_id": "2606.24622",
+    "notified_at": "2026-06-24",
+    "source": "system_a",
+    "score": 9,
+    "star_delta": null,
+    "github_url": null,
+    "stars_last_checked": null,
+    "stars_checked_at": null
+  },
+  {
+    "arxiv_id": "2606.24589",
+    "notified_at": "2026-06-24",
+    "source": "system_a",
+    "score": 9,
+    "star_delta": null,
+    "github_url": null,
+    "stars_last_checked": null,
+    "stars_checked_at": null
+  },
+  {
+    "arxiv_id": "2606.24535",
+    "notified_at": "2026-06-24",
+    "source": "system_a",
+    "score": 9,
+    "star_delta": null,
+    "github_url": null,
+    "stars_last_checked": null,
+    "stars_checked_at": null
+  },
+  {
+    "arxiv_id": "2606.24515",
+    "notified_at": "2026-06-24",
+    "source": "system_a",
+    "score": 9,
+    "star_delta": null,
+    "github_url": null,
+    "stars_last_checked": null,
+    "stars_checked_at": null
+  },
+  {
+    "arxiv_id": "2606.23991",
+    "notified_at": "2026-06-24",
+    "source": "system_b",
+    "score": null,
+    "star_delta": null,
+    "github_url": null,
+    "stars_last_checked": null,
+    "stars_checked_at": null
+  },
+  {
+    "arxiv_id": "2606.22197",
+    "notified_at": "2026-06-24",
+    "source": "system_b",
+    "score": null,
+    "star_delta": null,
+    "github_url": "https://github.com/BatFaceWayne/Multi4D",
+    "stars_last_checked": null,
+    "stars_checked_at": null
+  },
+  {
+    "arxiv_id": "2606.23679",
+    "notified_at": "2026-06-24",
+    "source": "system_b",
+    "score": null,
+    "star_delta": null,
+    "github_url": null,
+    "stars_last_checked": null,
+    "stars_checked_at": null
+  },
+  {
+    "arxiv_id": "2606.24526",
+    "notified_at": "2026-06-24",
+    "source": "system_b",
+    "score": null,
+    "star_delta": null,
+    "github_url": null,
     "stars_last_checked": null,
     "stars_checked_at": null
   }
